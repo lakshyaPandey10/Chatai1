@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Gyanni AI</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="box">
+
+<h1>🤖 Gyanni AI</h1>
+
+<div id="chat"></div>
+
+<input id="input" placeholder="Type message">
+<button onclick="send()">Send</button>
+
+<br><br>
+
+<a href="https://youtube.com/@mr.gyani3" target="_blank">
+YouTube
+</a>
+
+<a href="https://www.instagram.com/_lakshhh__7" target="_blank">
+Instagram
+</a>
+
+<p>Made by Lakshya Pandey ❤️</p>
+
+</div>
+
+<script>
+
+async function send(){
+
+let input = document.getElementById("input");
+
+let msg = input.value;
+
+document.getElementById("chat").innerHTML +=
+"<p><b>You:</b> "+msg+"</p>";
+
+let res = await fetch("/chat",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+message:msg
+})
+
+});
+
+let data = await res.json();
+
+document.getElementById("chat").innerHTML +=
+"<p><b>Gyanni AI:</b> "+data.reply+"</p>";
+
+input.value="";
+
+}
+
+</script>
+
+</body>
+</html>
